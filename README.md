@@ -13,16 +13,44 @@
 
 ## Установка
 
-<!-- Опишите установку: клонирование, зависимости, переменные окружения -->
+Требуется JDK 21+, Docker и Google Chrome. Драйвер Chrome подбирается Selenium Manager автоматически.
 
 ```bash
 git clone https://github.com/mikitasazan/qa-auto-engineer-java-project-385.git
 cd qa-auto-engineer-java-project-385
+make install
 ```
 
 ## Использование
 
-<!-- Добавьте примеры запуска и запись asciinema — именно это смотрит работодатель -->
+Тестируемое приложение поднимается отдельным контейнером на порту 5173:
+
+```bash
+make start
+```
+
+В другом терминале — прогон тестов и проверка стиля:
+
+```bash
+make test        # ./gradlew test
+make lint        # ./gradlew spotlessCheck
+make lint-fix    # ./gradlew spotlessApply
+```
+
+Остановить приложение: `make stop`.
+
+### Что покрыто тестами
+
+| Набор | Что проверяет |
+|---|---|
+| `ApplicationSmokeTest` | приложение поднимается, отдаёт страницу входа |
+| `AuthenticationTest` | вход с верными и неверными данными, выход |
+| `UsersManagementTest` | CRUD пользователей |
+| `StatusesManagementTest` | CRUD статусов задач |
+| `LabelsManagementTest` | CRUD меток |
+| `KanbanBoardTest` | канбан-доска: фильтрация, смена статуса, карточки задач |
+
+Инфраструктура тестов: `pages/` — Page Object на каждый экран, `support/` — фабрика браузера, локаторы и логирование, `config/` — учётные данные и настройки прогона.
 
 ---
 
