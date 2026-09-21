@@ -1,6 +1,9 @@
 APP_IMAGE ?= hexletprojects/qa_auto_java_testing_kanban_board_project_ru_app
 APP_CONTAINER ?= kanban-app
 APP_PORT ?= 5173
+APP_BASE_URL ?= http://localhost:$(APP_PORT)
+
+export APP_BASE_URL
 
 .PHONY: install start stop restart test lint lint-fix
 
